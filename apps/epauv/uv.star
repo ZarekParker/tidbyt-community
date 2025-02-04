@@ -67,6 +67,7 @@ def main(config):
         #     current_uv, max_uv = get_openuv_uv(config)
 
     if current_uv == None or max_uv == None:
+            print('none')
             return []
 
     columns = [
@@ -133,8 +134,8 @@ def get_epa_uv(config):
         # now_hour = "%s AM" % (zero_padded_hour)
     # print("%s clean" % now_hour)
     
-    # now_formatted = "%s/%d/%d %s" % (months[now.month-1], now.day, now.year, now_hour)
-    now_formatted = "%s/%d/%d %s" % (months[now.month-1], 24, now.year, now_hour)
+    now_formatted = "%s/%d/%d %s" % (months[now.month-1], now.day, now.year, now_hour)
+    # now_formatted = "%s/%d/%d %s" % (months[now.month-1], 24, now.year, now_hour)
     
     # print("Now is formatted as %s" % ( epa_formatted))
     # print(epa_uv_data)
@@ -142,6 +143,7 @@ def get_epa_uv(config):
     max_uv = 0
     current_uv = None
     for uv_item in epa_uv_data:
+        # print(uv_item)
         # print(float(uv_item.get("UV_VALUE")))
         # print(float(uv_item.get("UV_VALUE")) > max_uv)
         uv_item_date_time =  str(uv_item.get("DATE_TIME").upper())
@@ -196,7 +198,7 @@ def get_openuv_uv(config):
 def get_epa_uv_data(config):
     
     zip_code = config.get("zip_code")
-    if(len(zip_code) != 5):
+    if(zip_code != None and len(zip_code) != 5):
         print("incorrect zip length for zip", zip_code)
         return None
     print("zip code is %s" % (zip_code))
